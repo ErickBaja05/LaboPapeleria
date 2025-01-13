@@ -1,4 +1,6 @@
 package papeleria;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 //import java.lang.Throwable;
 
@@ -36,11 +38,35 @@ public class AppPapeleria {//extends Throwable{
         Cuaderno cuad1 = new Cuaderno("Norma", 1.25, 60, "cuadros");
         Lapiz lp1 = new Lapiz("Bic", 0.75, "HB");
         Lapiz lp2 = new Lapiz("Bic", 0.65, "HB");
-        Cuaderno cuad2 = new Cuaderno("Norma", 1.5, 60, "Dos lineas");
-        
+        Cuaderno cuad2 = new Cuaderno("Norma", 3.1, 60, "Dos lineas");
+
+        /*
         System.out.println(cuad1.equals(lp1));  //false
         System.out.println(lp1.equals(lp2));    //false
         System.out.println(lp2.equals(lp1));    //false
         System.out.println(cuad1.equals(cuad2));    //true
+         */
+        Scanner sc = new Scanner(System.in);
+        Reserva rsv = new Reserva(vn1);
+        boolean valid = false;
+        while (!valid) {
+            try{
+                rsv.setProducto(cuad2);
+                System.out.println("Ingrese el plazo en días (1-30) para pagar el producto");
+                int fecha = Integer.parseInt(sc.nextLine());
+                rsv.setFechaLimite(fecha);
+            } catch (NumberFormatException e) {
+                System.out.println("El plazo en dias ingresado no es un número valido, intente de nuevo");
+                continue;
+            } catch (IllegalArgumentException e1) {
+                System.out.println("La fecha limite está fuera de lo que permitimos en la tienda, intente de nuevo");
+                continue;
+            }
+            valid = true;
+        }
+        rsv.setPrecioTarifa();
+        rsv.setCuotas();
+        System.out.println(rsv.toString());
+
     }
 }
