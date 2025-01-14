@@ -49,7 +49,12 @@ public class Reserva extends Comprobante implements IVA, Cargo {
     }
 
     public void setPrecioTarifa() {
-        this.precioTarifa = impuestoIVA() + calculoCargo();
+        if(fechaLimite ==1){
+            this.precioTarifa = impuestoIVA() + calculoCargo();
+        }
+        else{
+            this.precioTarifa = impuestoIVA() + calculoCargo() + producto.getPrecio()*0.10;
+        }
     }
 
     public double getCuotas() {
@@ -57,12 +62,16 @@ public class Reserva extends Comprobante implements IVA, Cargo {
     }
 
     public void setCuotas() {
-        this.cuotas = ((precioTarifa) / fechaLimite)+0.005;
+        if(fechaLimite == 1){
+            this.cuotas = precioTarifa;
+        }else {
+            this.cuotas = ((precioTarifa) / fechaLimite) + 0.005;
+        }
     }
 
     @Override
     public String toString() {
-        return String.format("%sValor de crédito: %.2f%nPago en cuotas: %.2f%nVálido hasta: %s días%n%s%n¡A su servicio!%nNota: De sobrar saldo, se lo devolverá al pagaar la última cuota.",super.toString(),
+        return String.format("%sValor de crédito + IVA: %.2f%nPago en cuotas: %.2f%nVálido hasta: %s día/s%n%s%n¡A su servicio!%nNota: De sobrar saldo, se mantendrá como abono para próximas compras.",super.toString(),
                 precioTarifa,this.cuotas,this.fechaLimite, this.vendedor.toString());
     }
 
