@@ -1,9 +1,11 @@
 package papeleria;
 
+import java.util.Objects;
+
 public class Cuaderno extends Producto {
 
     private int nroHojas;
-    private String linea;
+    private String linea; //Se refiere al tipo de cuaderno, es decir, si es de cuadros, lineas, etc.
 
     public Cuaderno(String nombre, double precio, int nroHojas, String linea) {
 
@@ -34,7 +36,7 @@ public class Cuaderno extends Producto {
 
     @Override
     public String toString() {
-
+        System.out.println("**Cuaderno**");
         return String.format("%sNro de hojas: %d%nTipo de linea: %s%n",super.toString(),this.nroHojas,this.linea);
     }
     
@@ -52,6 +54,12 @@ public class Cuaderno extends Producto {
         }
         
         Cuaderno fantasma = (Cuaderno)obj;
-        return this.nroHojas == fantasma.nroHojas;
+        return this.nroHojas == fantasma.nroHojas && this.linea.equals(fantasma.linea);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nroHojas, linea);
+    }
+
 }
