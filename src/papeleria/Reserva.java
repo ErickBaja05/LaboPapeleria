@@ -1,5 +1,7 @@
 package papeleria;
 
+import java.util.Objects;
+
 public class Reserva extends Comprobante implements IVA, Cargo {
 
     private static int contador = 0;
@@ -90,6 +92,27 @@ public class Reserva extends Comprobante implements IVA, Cargo {
         } else {
             return (Cargo.cargo + 0.05) * producto.getPrecio(); // 15% del costo total
         }
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if(!super.equals(obj)) {
+            return false;
+        }
+
+        if(!(obj instanceof NotaVenta)) {
+
+            return false;
+        }
+
+        Reserva fantasma = (Reserva) obj;
+
+        return this.fechaLimite == fantasma.fechaLimite && this.vendedor.equals(fantasma.vendedor);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.fechaLimite, this.vendedor);
     }
 
 }

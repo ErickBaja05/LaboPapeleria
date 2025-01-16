@@ -1,5 +1,7 @@
 package papeleria;
 
+import java.util.Objects;
+
 public abstract class Comprobante {
 
     protected int numero;
@@ -40,4 +42,26 @@ public abstract class Comprobante {
     public String toString() {
         return String.format("%d%n%s%n%s%n", this.numero, this.producto.toString(),this.fecha);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj) {
+
+            return true;
+        }
+
+        if(obj == null || getClass() != obj.getClass()) {
+
+            return false;
+        }
+
+        Comprobante fantasma = (Comprobante) obj;
+        return this.numero == fantasma.numero;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.numero);
+    }
+
 }

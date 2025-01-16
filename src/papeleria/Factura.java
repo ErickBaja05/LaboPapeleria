@@ -1,6 +1,7 @@
 package papeleria;
 
 import java.lang.Throwable;
+import java.util.Objects;
 
 public class Factura extends Comprobante implements IVA {
 
@@ -59,18 +60,39 @@ public class Factura extends Comprobante implements IVA {
         return String.format("%s%s%sPrecio Final: %.2f",super.toString(),this.cliente.toString(),
                 this.vendedor.toString(),this.impuestoIVA());
     }
-    
+
+//    @Override
+//    public void finalize() throws Throwable {
+//
+//        try {
+//
+//            this.contador--;
+//            System.out.printf("Se ha eliminado el comprobante %d.%n",this.numero);
+//        } finally {
+//
+//            super.finalize();
+//        }
+//    }
+
     @Override
-    public void finalize() throws Throwable {
-        
-        try {
-            
-            this.contador--;
-            System.out.printf("Se ha eliminado el comprobante %d.%n",this.numero);
-        } finally {
-            
-            super.finalize();
+    public boolean equals(Object obj) {
+        if(!super.equals(obj)) {
+            return false;
         }
+
+        if(!(obj instanceof NotaVenta)) {
+
+            return false;
+        }
+
+        Factura fantasma = (Factura) obj;
+
+        return this.cliente.equals(fantasma.cliente) && this.vendedor.equals(fantasma.vendedor);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.cliente, this.vendedor);
     }
 
 
