@@ -1,9 +1,11 @@
 package papeleria;
 
+import java.util.Objects;
+
 public class Borrador extends Producto {
     
     private double peso;
-    private String tipo;
+    private String tipo; //Se refiere a si es de queso, blanco, de colores, etc.
     
     public Borrador(String nombre, double precio, double peso, String tipo) {
         
@@ -30,7 +32,31 @@ public class Borrador extends Producto {
     
     @Override
     public String toString() {
-        
-        return String.format("%sBorrador de %s con un gramaje de %.2f gramos%n",super.toString(), this.tipo, this.peso);
+        System.out.println("**Borrador**");
+        return String.format("%sBorrador %s con un peso de %.2f gramos%n",super.toString(), this.tipo, this.peso);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if(!super.equals(obj)) {
+
+            return false;
+        }
+
+        if(!(obj instanceof Borrador)) {
+
+            return false;
+        }
+
+        Borrador fantasma = (Borrador) obj;
+
+        return this.peso == fantasma.peso && this.tipo.equals(fantasma.tipo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(peso, tipo);
+    }
+
 }

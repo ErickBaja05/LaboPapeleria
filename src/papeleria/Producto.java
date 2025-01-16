@@ -1,5 +1,7 @@
 package papeleria;
 
+import java.util.Objects;
+
 public abstract class Producto {
 
     protected String nombre;
@@ -34,9 +36,10 @@ public abstract class Producto {
     @Override
     public String toString() {
 
-        return String.format("%s; PVP: %.2f%n",this.nombre, this.precio);
+        return String.format("Marca: %s; PVP: %.2f%n",this.nombre, this.precio);
     }
-    
+
+    @Override
     public boolean equals(Object obj) {
         
         if(this == obj) {
@@ -50,6 +53,12 @@ public abstract class Producto {
         }
         
         Producto fantasma = (Producto) obj;
-        return this.nombre.equals(fantasma.nombre);
+        return this.nombre.equals(fantasma.nombre) && this.precio == fantasma.precio;
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nombre, precio);
+    }
+
 }
