@@ -13,6 +13,11 @@ public class Cuaderno extends Producto {
         this.nroHojas = nroHojas;
         this.linea = linea;
     }
+    public Cuaderno(){
+        super("Sin nombre", 0);
+        this.nroHojas = 0;
+        this.linea = "";
+    }
 
     public int getNroHojas() {
 

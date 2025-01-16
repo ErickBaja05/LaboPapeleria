@@ -11,7 +11,11 @@ public class Lapiz extends Producto {
         super(nombre, precio);
         this.dureza = dureza;
     }
+    public Lapiz(){
+        super("Sin nombre" , 0);
+        this.dureza = "Sin dureza";
 
+    }
     public String getDureza() {
 
         return this.dureza;

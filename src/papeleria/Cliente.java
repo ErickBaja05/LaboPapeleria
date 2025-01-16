@@ -5,7 +5,7 @@ public class Cliente extends Persona {
     private String correo;
     private String direccion;
     private String telefono;
-    private int idCliente; // Para
+    private int idCliente; // Para equals
 
     // Constructor por defecto
     public Cliente() {
@@ -71,9 +71,9 @@ public class Cliente extends Persona {
     @Override
     public String toString() {
 
-        return String.format("%sDireccion: %s%nTelefono: %s%nCorreo Eletrónico: %s%nId.Cliente: %d%n", super.toString(),
+        return String.format("%sDireccion: %s%nTelefono: %s%nCorreo Eletrónico: %s%n", super.toString(),
                 this.direccion,
-                this.telefono, this.correo, this.idCliente);
+                this.telefono, this.correo);
     }
 
     // Métodos de comparación:

@@ -17,7 +17,7 @@ public class NotaVenta extends Comprobante {
 
     @Override
     public String toString() {
-        return String.format("%s CLIENTE: %S ", super.toString(), this.cliente.toString());
+        return String.format("%sCLIENTE:%n%s ", super.toString(), this.cliente.toString());
     }
 
     @Override

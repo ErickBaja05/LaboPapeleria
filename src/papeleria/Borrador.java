@@ -13,6 +13,12 @@ public class Borrador extends Producto {
         this.peso = peso;
         this.tipo = tipo;
     }
+
+    public Borrador() {
+        super("Sin nombre" , 0);
+        this.peso = 0;
+        this.tipo = "Sin tipo";
+    }
     
     public double getPeso() {
         return peso;
